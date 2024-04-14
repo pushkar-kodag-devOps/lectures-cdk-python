@@ -27,10 +27,10 @@ class LecturesCdkPythonStack(Stack):
 
         topic.add_subscription(subs.SqsSubscription(queue))
 
-        my_bucket=s3.Bucket(scope, "Bucket",
+        my_bucket=s3.Bucket(self, "Bucket",
             block_public_access=s3.BlockPublicAccess.BLOCK_ALL,
             encryption=s3.BucketEncryption.S3_MANAGED,
-            enforce_sSL=True,
+            enforce_ssl=True,
             versioned=True,
             removal_policy=RemovalPolicy.RETAIN
         )
