@@ -6,6 +6,8 @@ from aws_cdk import (
     aws_sqs as sqs,
     aws_sns as sns,
     aws_sns_subscriptions as subs,
+    RemovalPolicy,
+    aws_s3 as s3
 )
 
 
@@ -24,3 +26,11 @@ class LecturesCdkPythonStack(Stack):
         )
 
         topic.add_subscription(subs.SqsSubscription(queue))
+
+        my_bucket=s3.Bucket(scope, "Bucket",
+            block_public_access=s3.BlockPublicAccess.BLOCK_ALL,
+            encryption=s3.BucketEncryption.S3_MANAGED,
+            enforce_sSL=True,
+            versioned=True,
+            removal_policy=RemovalPolicy.RETAIN
+        )
